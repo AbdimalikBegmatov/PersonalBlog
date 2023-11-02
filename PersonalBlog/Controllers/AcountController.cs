@@ -163,6 +163,8 @@ namespace PersonalBlog.Controllers
             }
             return View(changePasswordViewModel);
         }
+
+        [AllowAnonymous]
         [Route("register")]
         [HttpGet]
         public async Task<IActionResult> Register([FromServices] IMembership membership, string? code)
@@ -177,6 +179,8 @@ namespace PersonalBlog.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        [AllowAnonymous]
         [Route("register")]
         [HttpPost]
         [AutoValidateAntiforgeryToken]
@@ -204,7 +208,10 @@ namespace PersonalBlog.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, "Editor");
                     await membership.DisableMembershipAsync(rvm.Code);
-                    await _signInManager.SignInAsync(user, true);
+                    if (!User.Identity.IsAuthenticated)
+                    {
+                        await _signInManager.SignInAsync(user, true);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
