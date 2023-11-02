@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Membership>
+@{
+    ViewBag.Title = ViewBag.Title;
+}
+
+<div class="row mt-5">
+    <div>
+        <h3 class="m-2 h3 text-start">@ViewBag.Title</h3>
+        <div class="m-2 mb-5">
+            <a class="link-primary text-decoration-none" asp-controller="Home" asp-action="Index">Главная</a> /
+            <a class="link-primary text-decoration-none" asp-action="Index">Все пользователи</a>
+        </div>
+    </div>
+
+    <div class="row m-4">
+        <a class="col-3 btn btn-primary btn-sm" asp-controller="Membership" asp-action="Generate">Сгенерировать новое приглашение</a>
+    </div>
+
+    <div class="row ">
+        <div class="row m-2 border-bottom">
+            <div class="row justify-content-center">
+                <label class="col-6">Ссылка</label>
+                <label class="col-2">Дата генерации</label>
+                <label class="col-2">Статус</label>
+                <label class="col"></label>
+            </div>
+        </div>
+        <div class="row m-2">
+
+            @foreach (var membership in Model)
+            {
+                <div class="row justify-content-center border-bottom">
+                    <label class="col-6">@membership.Link</label>
+                    <label class="col-2">@membership.CreatedDate</label>
+                    @if (membership.IsEnable)
+                    {
+                        <label class="col-2 text-success">Активный</label>
+                    }
+                    else
+                    {
+                        <label class="col-2 text-warning">Не активный</label>
+                    }
+                    
+                    <div class="col g-1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <form asp-controller="Membership" asp-action="Delete" asp-route-membershipId="@membership.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model LoginViewModel
+
+<div class="text-center mt-5">
+    <main >
+        <form asp-controller="Acount" asp-action="Login" method="post"> 
+            <div class="text-danger text-center" asp-validation-summary="ModelOnly"></div>
+            <div class="row">
+                <h1 class="h3 mb-3 fw-normal">Войти</h1>
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" asp-for="Email" id="floatingInput" placeholder="EmailAddress">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" asp-for="Password" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+                </div>
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2">
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+                    </div>
+                </div>
+                @Html.AntiForgeryToken()
+            </div>
+
+        </form>
+    </main>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

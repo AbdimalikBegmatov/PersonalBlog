@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+@model EditUserViewModel
+
+<h2 class="h2 text-center border-bottom">@ViewBag.Title</h2>
+<div class="text-center mb-3">
+    <a class="link-primary text-decoration-none" asp-controller="Home" asp-action="Index">Главная</a> / 
+    <a class="link-primary text-decoration-none" asp-action="Index">Все пользователи</a>
+</div>
+<form method="post" asp-action="Edit">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Id</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="Id" readonly/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Имя</label>
+                <div class="col-5">
+                    <input class="form-control" asp-for="FirstName"/>
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Фамилия</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Email</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Номер</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="PhoneNumber" />
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">День рождение</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="DateOfBirth" type="date"/>
+                    <span class="text-danger" asp-validation-for="DateOfBirth"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row justify-content-center">
+                <button type="submit" class="col-2 btn btn-primary btn-sm me-1">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

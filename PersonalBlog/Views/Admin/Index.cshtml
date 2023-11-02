@@ -1,0 +1,51 @@
+﻿@model IEnumerable<User>
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<div class="row bg-secondary bg-opacity-25 mt-5">
+    <div>
+        <h3 class="m-2 h3 text-start">Управление ползователями</h3>
+        <div class="m-2 mb-5">
+            <a asp-action="Index" asp-controller="Home">Главная</a>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="row m-2">
+            <div class="row justify-content-center">
+                <label class="col-3">Email</label>
+                <label class="col-2">Имя</label>
+                <label class="col-2">Фамилия</label>
+                <label class="col-2">Номер</label>
+                <label class="col"></label>
+            </div>
+        </div>
+        <div class="row m-2">
+
+            @foreach (User user in Model)
+            {
+                <div class="row justify-content-center">
+                    <label class="col-3">@user.Email</label>
+                    <label class="col-2">@user.FirstName</label>
+                    <label class="col-2">@user.LastName</label>
+                    <label class="col-2">@user.PhoneNumber</label>
+                    <div class="col g-1">
+                        <div class="row">
+                            <button class="col-auto btn btn-primary btn-sm me-1"><a asp-action="Edit" asp-route-id="@user.Id" class="text-white text-decoration-none">Изменить</a></button>
+                            <button class="col-auto btn btn-secondary btn-sm me-1"><a asp-action="EditRoles" asp-route-userId="@user.Id" class="text-white text-decoration-none">Права доступа</a></button>
+                            <div class="col-auto">
+                                <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
