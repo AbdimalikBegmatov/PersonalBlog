@@ -28,6 +28,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<IMembership, MembershipRepository>();
+builder.Services.AddTransient<ICategory, CategoryRepository>();
+builder.Services.AddTransient<IPublication, PublicationRepository>();
 
 var app = builder.Build();
 
@@ -38,7 +40,9 @@ using (var scope = app.Services.CreateScope())
     {
         var userManager = services.GetRequiredService<UserManager<User>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var applicationContext = services.GetRequiredService<ApplicationDbContext>();
         await RoleInitializer.InitializerAsync(userManager, roleManager);
+        await ContentInitializer.InitializeAsync(applicationContext);
     }
     catch (Exception)
     { 

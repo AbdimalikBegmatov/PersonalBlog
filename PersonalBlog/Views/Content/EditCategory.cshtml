@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Title;
+}
+
+@model CategoryViewModel
+
+<h2 class="h2 text-center border-bottom">@ViewBag.Title</h2>
+<div class="text-center mb-3">
+    <a class="link-primary text-decoration-none" asp-controller="Content" asp-action="Index">Главная</a>
+</div>
+<form method="post" asp-action="EditCategory">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Название</label>
+                <div class="col-7">
+                    <input type="hidden" class="form-control" asp-for="Id" />
+                    <span class="text-danger" asp-validation-for="Id"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Название</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row">
+                <label class="col-3 form-label">Описание</label>
+                <div class="col-7">
+                    <input class="form-control" asp-for="Description" />
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center m-1">
+        <div class="col-6">
+            <div class="row justify-content-center">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="col-2 btn btn-primary btn-sm me-1">Добавить</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

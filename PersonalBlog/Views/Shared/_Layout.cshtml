@@ -21,6 +21,7 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li><a asp-controller="Membership" asp-action="Index" class="nav-link px-2 text-white">Приглашение</a></li>
+                        <li><a asp-controller="Content" asp-action="Index" class="nav-link px-2 text-white">Материалы</a></li>
                     }
                     @* <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
